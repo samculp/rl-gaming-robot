@@ -19,5 +19,5 @@ void loop() {
 
   // release
   servo.write(REST_ANGLE);
-  delay(1000);
+  delay(2000);
 }
