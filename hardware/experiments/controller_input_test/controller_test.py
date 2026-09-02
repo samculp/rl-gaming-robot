@@ -17,7 +17,7 @@ print(f"Buttons: {controller.get_numbuttons()}")
 print(f"Axes: {controller.get_numaxes()}")
 print(f"Hats/D-pads: {controller.get_numhats()}")
 
-print("\nPress ubttons. Close the window or Ctrl+C to quit.\n")
+print("\nPress buttons. Close the window or Ctrl+C to quit.\n")
 
 while True:
     for event in pygame.event.get():
