@@ -1,0 +1,8 @@
+#KiCad local and backup files
+*.kicad_prl
+*.bak
+*.bck
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*-backups/
+.history/
