@@ -17,7 +17,7 @@ jobs:
           python-version: "3.13"
 
       - name: Install dependencies
-        run: 
+        run: |
           cat requirements.txt
           python -m pip install -r requirements.txt
           python -m pip show pytest
