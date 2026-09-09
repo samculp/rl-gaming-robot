@@ -1,13 +1,18 @@
 # AI Usage & Verification Log
 
-**Project Name:** RL Gaming Robot  
-**Project Area:** Hardware / Controller Input Experiment  
+**Project Name:** RL Gaming Robot
 
 ---
 
 ## Overview & AI Usage Statement
 
-TODO
+### Overview & AI Usage Statement
+
+AI tools were used throughout the project as a supplemental development resource for brainstorming, troubleshooting, and improving implementation approaches. AI-generated code and recommendations were reviewed, tested, and modified by the project team before being incorporated into the project. The team remains responsible for understanding and verifying all implemented solutions. AI was not treated as a replacement for independent research, engineering judgment, or testing.
+
+### Responsible AI Usage
+
+AI was used responsibly by treating its output as a starting point rather than an authoritative source. Generated code was reviewed for correctness, tested in the project environment, and modified when necessary. Project decisions and final implementations were verified by the team, and AI assistance was documented in this log to maintain transparency and accountability.
 
 ---
 
@@ -83,3 +88,115 @@ if axis_1 < -DEADZONE:
     print("UP")
 elif axis_1 > DEADZONE:
     print("DOWN")
+```
+
+---
+
+## Entry 2: CI/CD Infrastructure - Pytest Unit Test Setup
+
+* **Date:** September 8, 2026  
+* **Tool Used:** ChatGPT  
+* **Associated Git Issue:** CI/CD Infrastructure & Test Logs  
+* **Associated Feature Branch:** `chore/cicd-implementation`  
+
+### Exact Prompts Submitted:
+
+> "whats best practice for virtual environments when i have a bunch of python tests like this"
+
+> "Record pygame as a project dependency"
+
+> "what directory should tests go under"
+
+> "next"
+
+> "okay next"
+
+> "run tests failed. said no module named pytest but install dependecies worked and pytest was included in that"
+
+> "add this conversation about setting up pytest to this log"
+
+### AI Output Summary & Code Generated
+
+ChatGPT provided guidance for establishing a Python unit-testing structure suitable for CI/CD. The guidance included:
+
+* Moving the Python virtual environment from the individual hardware experiment directory to the repository root.
+* Using one project-level virtual environment rather than separate virtual environments for individual test files.
+* Adding `pygame` and `pytest` as project dependencies in `requirements.txt`.
+* Keeping the virtual environment out of source control through `.gitignore`.
+* Creating a top-level `tests/` directory for automated unit tests.
+* Renaming the hardware controller experiment so pytest would not automatically discover it as a test module.
+* Separating executable controller code from importable code by placing the controller program inside a `main()` function and using an `if __name__ == "__main__":` guard.
+* Creating a unit-testable `get_button_action()` function and a corresponding pytest test.
+* Configuring GitHub Actions to install dependencies and execute tests on pull requests.
+
+### Human Testing, Verification & Results
+
+The initial pytest execution failed because the hardware controller experiment was automatically collected as a test module and attempted to access a physical controller.
+
+After restructuring the controller experiment, pytest was able to collect and execute the unit test without requiring physical hardware.
+
+The final local test execution successfully reported:
+
+```text
+1 passed
+```
+
+The GitHub Actions workflow was then configured to install dependencies from `requirements.txt` and execute:
+
+```text
+python -m pytest
+```
+
+An initial CI failure was traced to an empty `requirements.txt`. After adding the required dependencies:
+
+```text
+pygame
+pytest
+```
+
+the GitHub Actions test job successfully passed.
+
+### Human Review & Modifications Identified
+
+Human review determined that the original controller experiment was an interactive hardware test rather than a unit-testable module. The code was therefore modified so importing the module does not immediately initialize the controller or terminate when no controller is connected.
+
+The CI workflow was also verified through a pull request, confirming that the automated pytest execution can run successfully in GitHub Actions without physical controller hardware.
+
+---
+
+## Entry 3: CI/CD Infrastructure - Ruff Linting
+
+* **Date:** September 9, 2026  
+* **Tool Used:** ChatGPT  
+* **Associated Git Issue:** CI/CD Infrastructure & Test Logs  
+* **Associated Feature Branch:** `chore/cicd-implementation`
+
+### Exact Prompts Submitted:
+
+> "lets continue with linting"
+
+> "all checks passed"
+
+> "it needs to be included in the yaml right?"
+
+### AI Output Summary & Code Generated
+
+ChatGPT provided guidance for adding Ruff as the project's Python linting tool. The guidance included:
+
+* Adding `ruff` to `requirements.txt` alongside `pygame` and `pytest`.
+* Installing Ruff in the project virtual environment.
+* Running `python -m ruff check .` locally to identify linting issues.
+* Reviewing Ruff's reported issues rather than automatically applying fixes.
+* Adding a GitHub Actions workflow step to execute `python -m ruff check .` so linting is automatically performed in CI on pull requests.
+
+### Human Testing, Verification & Results
+
+The initial local Ruff check identified four issues: two import-formatting issues and two uses of `quit()` where Ruff recommended `sys.exit()`.
+
+The controller input module was modified to import `sys` and replace both `quit()` calls with `sys.exit()`.
+
+Ruff was run again with:
+
+```text
+python -m ruff check .
+```

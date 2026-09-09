@@ -6,3 +6,7 @@
 *.kicad_sch-bak
 *-backups/
 .history/
+
+# virtual environment
+.venv/
+venv/
