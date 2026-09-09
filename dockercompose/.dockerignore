@@ -1,0 +1,5 @@
+#Please ignore the following.
+.env
+*.pyc
+__pycache__
+redis-data

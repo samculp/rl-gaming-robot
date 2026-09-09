@@ -1,0 +1,21 @@
+#Defines the containers and services that make up the application.
+services:
+  web:
+    #Build the image for the web service using the Dockerfile in the folder ./dockercompose
+    build: ./dockercompose
+    #What port will the computer access the application at.
+    ports:
+      - "${APP_PORT:-8000}:5000"
+    #Defines enviroment variables just inside the web container.
+    environment:
+      #Default host value to use unless another is provided.
+      REDIS_HOST: ${REDIS_HOST:-redis}
+      #Default port value to use unless another is provided.
+      REDIS_PORT: ${REDIS_PORT:-6379}
+    #Waits for redis to run first before running the above.
+    depends_on:
+      - redis
+
+  #Use the existing redis image called "alpine".
+  redis:
+    image: redis:alpine

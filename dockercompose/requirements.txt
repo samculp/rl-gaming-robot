@@ -1,0 +1,3 @@
+#List of required python libraries for docker compose to work.
+flask
+redis
