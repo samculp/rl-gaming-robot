@@ -18,9 +18,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cat requirements.txt
           python -m pip install -r requirements.txt
-          python -m pip show pytest
 
       - name: Run tests
         run: python -m pytest
