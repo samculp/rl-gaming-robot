@@ -1,4 +1,6 @@
-from hardware.experiments.controller_input_test.controller_input import get_button_action
+from hardware.experiments.controller_input_test.controller_input import (
+    get_button_action,
+)
 
 
 def test_get_button_action():

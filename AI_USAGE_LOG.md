@@ -1,13 +1,18 @@
 # AI Usage & Verification Log
 
-**Project Name:** RL Gaming Robot  
-**Project Area:** Hardware / Controller Input Experiment  
+**Project Name:** RL Gaming Robot
 
 ---
 
 ## Overview & AI Usage Statement
 
-TODO
+### Overview & AI Usage Statement
+
+AI tools were used throughout the project as a supplemental development resource for brainstorming, troubleshooting, and improving implementation approaches. AI-generated code and recommendations were reviewed, tested, and modified by the project team before being incorporated into the project. The team remains responsible for understanding and verifying all implemented solutions. AI was not treated as a replacement for independent research, engineering judgment, or testing.
+
+### Responsible AI Usage
+
+AI was used responsibly by treating its output as a starting point rather than an authoritative source. Generated code was reviewed for correctness, tested in the project environment, and modified when necessary. Project decisions and final implementations were verified by the team, and AI assistance was documented in this log to maintain transparency and accountability.
 
 ---
 
@@ -156,3 +161,42 @@ the GitHub Actions test job successfully passed.
 Human review determined that the original controller experiment was an interactive hardware test rather than a unit-testable module. The code was therefore modified so importing the module does not immediately initialize the controller or terminate when no controller is connected.
 
 The CI workflow was also verified through a pull request, confirming that the automated pytest execution can run successfully in GitHub Actions without physical controller hardware.
+
+---
+
+## Entry 3: CI/CD Infrastructure - Ruff Linting
+
+* **Date:** September 9, 2026  
+* **Tool Used:** ChatGPT  
+* **Associated Git Issue:** CI/CD Infrastructure & Test Logs  
+* **Associated Feature Branch:** `chore/cicd-implementation`
+
+### Exact Prompts Submitted:
+
+> "lets continue with linting"
+
+> "all checks passed"
+
+> "it needs to be included in the yaml right?"
+
+### AI Output Summary & Code Generated
+
+ChatGPT provided guidance for adding Ruff as the project's Python linting tool. The guidance included:
+
+* Adding `ruff` to `requirements.txt` alongside `pygame` and `pytest`.
+* Installing Ruff in the project virtual environment.
+* Running `python -m ruff check .` locally to identify linting issues.
+* Reviewing Ruff's reported issues rather than automatically applying fixes.
+* Adding a GitHub Actions workflow step to execute `python -m ruff check .` so linting is automatically performed in CI on pull requests.
+
+### Human Testing, Verification & Results
+
+The initial local Ruff check identified four issues: two import-formatting issues and two uses of `quit()` where Ruff recommended `sys.exit()`.
+
+The controller input module was modified to import `sys` and replace both `quit()` calls with `sys.exit()`.
+
+Ruff was run again with:
+
+```text
+python -m ruff check .
+```

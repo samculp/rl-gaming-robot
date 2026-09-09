@@ -1,4 +1,7 @@
+import sys
+
 import pygame
+
 
 def main():
 
@@ -7,7 +10,7 @@ def main():
 
     if pygame.joystick.get_count() == 0:
         print("No controller deteced")
-        quit()
+        sys.exit()
     else:
         print("Controller detected!")
 
@@ -38,7 +41,7 @@ def main():
 
             elif event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
+                sys.exit()
 
 
 def get_button_action(button):
