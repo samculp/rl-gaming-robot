@@ -83,3 +83,76 @@ if axis_1 < -DEADZONE:
     print("UP")
 elif axis_1 > DEADZONE:
     print("DOWN")
+```
+
+---
+
+## Entry 2: CI/CD Infrastructure - Pytest Unit Test Setup
+
+* **Date:** September 8, 2026  
+* **Tool Used:** ChatGPT  
+* **Associated Git Issue:** CI/CD Infrastructure & Test Logs  
+* **Associated Feature Branch:** `chore/cicd-implementation`  
+
+### Exact Prompts Submitted:
+
+> "whats best practice for virtual environments when i have a bunch of python tests like this"
+
+> "Record pygame as a project dependency"
+
+> "what directory should tests go under"
+
+> "next"
+
+> "okay next"
+
+> "run tests failed. said no module named pytest but install dependecies worked and pytest was included in that"
+
+> "add this conversation about setting up pytest to this log"
+
+### AI Output Summary & Code Generated
+
+ChatGPT provided guidance for establishing a Python unit-testing structure suitable for CI/CD. The guidance included:
+
+* Moving the Python virtual environment from the individual hardware experiment directory to the repository root.
+* Using one project-level virtual environment rather than separate virtual environments for individual test files.
+* Adding `pygame` and `pytest` as project dependencies in `requirements.txt`.
+* Keeping the virtual environment out of source control through `.gitignore`.
+* Creating a top-level `tests/` directory for automated unit tests.
+* Renaming the hardware controller experiment so pytest would not automatically discover it as a test module.
+* Separating executable controller code from importable code by placing the controller program inside a `main()` function and using an `if __name__ == "__main__":` guard.
+* Creating a unit-testable `get_button_action()` function and a corresponding pytest test.
+* Configuring GitHub Actions to install dependencies and execute tests on pull requests.
+
+### Human Testing, Verification & Results
+
+The initial pytest execution failed because the hardware controller experiment was automatically collected as a test module and attempted to access a physical controller.
+
+After restructuring the controller experiment, pytest was able to collect and execute the unit test without requiring physical hardware.
+
+The final local test execution successfully reported:
+
+```text
+1 passed
+```
+
+The GitHub Actions workflow was then configured to install dependencies from `requirements.txt` and execute:
+
+```text
+python -m pytest
+```
+
+An initial CI failure was traced to an empty `requirements.txt`. After adding the required dependencies:
+
+```text
+pygame
+pytest
+```
+
+the GitHub Actions test job successfully passed.
+
+### Human Review & Modifications Identified
+
+Human review determined that the original controller experiment was an interactive hardware test rather than a unit-testable module. The code was therefore modified so importing the module does not immediately initialize the controller or terminate when no controller is connected.
+
+The CI workflow was also verified through a pull request, confirming that the automated pytest execution can run successfully in GitHub Actions without physical controller hardware.
