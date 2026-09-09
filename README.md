@@ -1,10 +1,10 @@
 # RL Gaming Robot
 
-The **RL Gaming Robot** is a senior design project focused on developing a Reinforcement Learning (RL) system that learns to play games through repeated attempts and applies its learned behavior to a physical gaming system.
+The RL Gaming Robot is a senior design project focused on developing a Reinforcement Learning system that learns to play games through repeated attempts and applies its learned behavior to a game to ultimately improve its score.
 
 The current target game is Tetris. The long-term goal is for the RL agent to make gameplay decisions and output controller commands that are translated into physical actions pressed on a controller by a robotic system.
 
-This repository contains the software, hardware, experiments, and testing resources used to develop and integrate the complete system.
+This repository contains the software and hardware elements used to create the project.
 
 ## Repository Structure
 
