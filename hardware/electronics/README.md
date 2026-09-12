@@ -14,4 +14,4 @@ Arduino → MOSFET driver → Solenoids
 
 ## Power Path
 
-Battery → BMS → Fuse → Power switch → Solenoid driver PCB → Solenoids
+Battery → BMS → Power switch → Fuse  → Solenoid driver PCB → Solenoids
