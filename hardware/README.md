@@ -12,9 +12,5 @@ Hardware design, firmware, schematics, experiments, and documentation for the RL
 
 ## System Overview
 
+See ![Hardware Block Diagram](hw_block_diagram.png) for block diagram of system architecture.
 See [`electronics/`](electronics/) for the electrical architecture and subsystem documentation.
-
-## Development Experiments
-
-* [`experiments/actuator_pulse/`](experiments/actuator_pulse/) — Solenoid actuator testing.
-* [`experiments/controller_input_test/`](experiments/controller_input_test/) — Controller input testing.
