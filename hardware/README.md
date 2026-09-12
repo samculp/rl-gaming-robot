@@ -12,5 +12,5 @@ Hardware design, firmware, schematics, experiments, and documentation for the RL
 
 ## System Overview
 
-See ![Hardware Block Diagram](hw_block_diagram.png) for block diagram of system architecture.
+See ![Hardware Block Diagram](HW_Block_Diagram.png) for block diagram of system architecture.
 See [`electronics/`](electronics/) for the electrical architecture and subsystem documentation.
