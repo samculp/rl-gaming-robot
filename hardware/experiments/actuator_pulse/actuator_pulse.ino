@@ -21,7 +21,8 @@ void loop() {
 }
 
 void pulse() {
+  Serial.println("Pulsing...");
   digitalWrite(solenoidPin, HIGH);
-  delay(3000);
+  delay(100);
   digitalWrite(solenoidPin, LOW);
 }
