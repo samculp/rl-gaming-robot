@@ -15,12 +15,6 @@ The battery pack consists of nine 18650 lithium-ion cells configured as 3S3P. Ea
 
 Battery → BMS → In-line switch → XT60 → 7.5 A fuse → PCB → Solenoids
 
-The BMS provides:
-- Overcharge protection
-- Over-discharge protection
-- Overcurrent and short-circuit protection
-- Cell balancing
-
 The Arduino is powered separately through USB.
 
 ## Solenoid Load
@@ -38,3 +32,9 @@ The maximum combined solenoid current is approximately 6.4 A when all four solen
 - Fuse: 7.5 A blade fuse
 - Maximum solenoid load: 6.4 A
 - Fuse margin: 1.1 A
+
+The BMS (battery management system) provides:
+- Overcharge protection
+- Over-discharge protection
+- Overcurrent and short-circuit protection
+- Cell balancing
